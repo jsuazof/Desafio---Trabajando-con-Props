@@ -6,17 +6,22 @@
         <p>Tarea: <input type="text" v-model="nombre" /></p>
         <button type="submit">Ingresar Tarea</button>
       </form>
-
-      <ul class="list-group" v-for="(tarea, id) in tareas" :key="tarea">
-        <li class="list-group-item">{{ id }} - {{ tarea.nombre }}</li>
-      </ul>
-    </div>
+        <h2>Lista de Tareas</h2>
+       <HelloWorld :tareas="this.tareas" @deleteItem="deleteItem" />
+     
+    </div> 
+  
   </div>
+ 
 </template>
 
 <script>
+import HelloWorld from "./components/HelloWorld.vue"
 export default {
-  el: "App",
+  name: "App",
+  components: {
+    HelloWorld,
+  },
   data() {
     return {
       nombre: "",
@@ -30,6 +35,9 @@ export default {
       });
       this.nombre = "";
     },
+    deleteItem: function(index){
+        this.tareas.splice(index,1)
+    }
   },
 };
 </script>
@@ -44,3 +52,5 @@ export default {
   margin-top: 60px;
 }
 </style>
+
+
